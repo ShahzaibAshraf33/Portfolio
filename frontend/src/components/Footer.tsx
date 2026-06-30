@@ -1,5 +1,21 @@
 import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import { HiMail } from 'react-icons/hi';
+import { Link } from 'react-scroll';
+
+const footerLinks = [
+  { label: 'Home', to: 'home' },
+  { label: 'About', to: 'about' },
+  { label: 'Skills', to: 'skills' },
+  { label: 'Projects', to: 'projects' },
+  { label: 'Contact', to: 'contact' },
+];
+
+const socialLinks = [
+  { Icon: FaGithub, href: 'https://github.com/ShahzaibAshraf33' },
+  { Icon: FaLinkedin, href: 'https://www.linkedin.com/in/shahzaib-ashraf-dev/' },
+  { Icon: FaTwitter, href: 'https://twitter.com/shahzaibashraf' },
+  { Icon: HiMail, href: 'mailto:shahzaibashraf99887@gmail.com' },
+];
 
 const Footer = () => (
   <footer className="relative z-10 border-t border-border-subtle bg-bg-primary">
@@ -15,18 +31,27 @@ const Footer = () => (
       </div>
 
       <div className="flex flex-wrap justify-center gap-6 text-text-secondary text-sm">
-        {['Home', 'About', 'Skills', 'Projects'].map((l) => (
-          <a key={l} href={`#${l.toLowerCase()}`} className="hover:text-accent transition-colors">
-            {l}
-          </a>
+        {footerLinks.map(({ label, to }) => (
+          <Link
+            key={label}
+            to={to}
+            smooth
+            duration={500}
+            offset={-80}
+            className="hover:text-accent transition-colors cursor-pointer"
+          >
+            {label}
+          </Link>
         ))}
       </div>
 
       <div className="flex gap-3">
-        {[FaGithub, FaLinkedin, FaTwitter, HiMail].map((Icon, i) => (
+        {socialLinks.map(({ Icon, href }, i) => (
           <a
             key={i}
-            href="#"
+            href={href}
+            target="_blank"
+            rel="noreferrer"
             className="w-9 h-9 border border-border-subtle rounded-md flex items-center justify-center text-text-secondary hover:border-accent hover:text-accent transition-all"
           >
             <Icon />

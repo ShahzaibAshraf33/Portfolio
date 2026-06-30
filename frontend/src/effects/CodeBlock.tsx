@@ -30,20 +30,20 @@ const CodeBlock = () => {
   }, []);
 
   return (
-    <div className="relative bg-code-bg border border-border-subtle rounded-xl p-8 shadow-2xl backdrop-blur-sm">
-      <div className="flex items-center gap-2 mb-4 pb-3 border-b border-border-subtle">
-        <div className="w-3 h-3 rounded-full bg-red-500" />
-        <div className="w-3 h-3 rounded-full bg-yellow-500" />
-        <div className="w-3 h-3 rounded-full bg-green-500" />
+    <div className="relative bg-code-bg border border-border-subtle rounded-xl p-8 shadow-2xl backdrop-blur-sm code-block-shell">
+      <div className="flex items-center gap-2 mb-3 pb-2 border-b border-border-subtle px-1">
+        <div className="w-2.5 h-2.5 rounded-full bg-red-500" />
+        <div className="w-2.5 h-2.5 rounded-full bg-yellow-500" />
+        <div className="w-2.5 h-2.5 rounded-full bg-green-500" />
         <span className="ml-auto text-text-muted text-xs font-mono">developer.ts</span>
       </div>
-      <div className="font-mono text-sm space-y-1.5 min-h-[220px]">
+      <div className="font-mono text-sm code-block-content">
         {typed.map((line, i) => (
           <motion.div
             key={i}
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
-            className={codeLines[i]?.color || 'text-text-primary'}
+            className={`${codeLines[i]?.color || 'text-text-primary'} code-block-line`}
           >
             {line}
           </motion.div>

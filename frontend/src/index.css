@@ -80,6 +80,23 @@ body {
   text-shadow: 0 0 20px rgba(184, 245, 106, 0.4);
 }
 
+.code-block-shell {
+  padding: 0.9rem;
+}
+
+.code-block-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.8rem 0.8rem 0.8rem 0.9rem;
+  min-height: 14rem;
+  line-height: 1.6;
+}
+
+.code-block-line {
+  padding-left: 0.25rem;
+}
+
 /* ── Shared button tokens ── */
 .btn-primary,
 .btn-outline {
