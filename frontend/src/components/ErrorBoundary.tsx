@@ -1,38 +1,53 @@
-import React from 'react';
+import React from "react";
 
 interface State {
   hasError: boolean;
 }
 
-class ErrorBoundary extends React.Component<React.PropsWithChildren<{}>, State> {
-  constructor(props: React.PropsWithChildren<{}>) {
+class ErrorBoundary extends React.Component<
+  React.PropsWithChildren<object>,
+  State
+> {
+  constructor(props: React.PropsWithChildren<object>) {
     super(props);
     this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError() {
+  static getDerivedStateFromError(): State {
     return { hasError: true };
   }
 
-  componentDidCatch(error: unknown, info: unknown) {
-    // You can log the error to an external service here
-    // console.error('Unhandled error:', error, info);
+  componentDidCatch(error: Error, info: React.ErrorInfo): void {
+    // Log the error for debugging or send it to a monitoring service
+    console.error("Unhandled error:", error);
+    console.error("Component stack:", info.componentStack);
   }
 
-  render() {
+  render(): React.ReactNode {
     if (this.state.hasError) {
       return (
-        <div className="min-h-screen flex items-center justify-center p-6">
-          <div className="bg-bg-card border border-border-subtle rounded-lg p-8 text-center">
-            <h2 className="text-xl font-semibold mb-2">Something went wrong</h2>
-            <p className="text-text-secondary">Please reload the page or try again later.</p>
-          </div>
+        <div className="flex min-h-screen flex-col items-center justify-center bg-white px-6 text-center">
+          <h1 className="mb-4 text-3xl font-bold text-red-600">
+            Something went wrong
+          </h1>
+
+          <p className="mb-6 text-gray-600">
+            Please reload the page or try again later.
+          </p>
+
+          <button
+            onClick={() => window.location.reload()}
+            className="rounded-lg bg-blue-600 px-5 py-2 text-white transition hover:bg-blue-700"
+          >
+            Reload Page
+          </button>
         </div>
       );
     }
 
-    return this.props.children as React.ReactElement;
+    return this.props.children;
   }
 }
 
 export default ErrorBoundary;
+
